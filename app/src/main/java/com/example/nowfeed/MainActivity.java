@@ -2,6 +2,7 @@ package com.example.nowfeed;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
@@ -60,10 +61,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
         mDetector = new GestureDetectorCompat(this,this);
 
-        if (isNetworkOnline() == false){
-            Toast toast = Toast.makeText(this, "Please check your network. App will only have partial functionality", Toast.LENGTH_LONG);
-            toast.show();
-        }
+
 
 //        //Hyun
           mCardsData.add("My notes");
@@ -162,6 +160,16 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (haveNetworkConnection() == false){
+            Toast toast = Toast.makeText(this, "Please check your network. App will only have partial functionality", Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+    }
+
     public void WeatherAPI() {
         mRetrofit = new Retrofit.Builder().baseUrl("http://api.openweathermap.org/").addConverterFactory(GsonConverterFactory.create()).build();
         mWeatherApi = mRetrofit.create(WeatherApi.class);
@@ -208,24 +216,23 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         editor.putStringSet("mSavedNotes", ThirdCardViewHolder.getSavedHash());
         editor.apply();
     }
+    
 
-    public boolean isNetworkOnline() {
-        boolean status=false;
-        try{
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getNetworkInfo(0);
-            if (netInfo != null && netInfo.getState()==NetworkInfo.State.CONNECTED) {
-                status= true;
-            }else {
-                netInfo = cm.getNetworkInfo(1);
-                if(netInfo!=null && netInfo.getState()==NetworkInfo.State.CONNECTED)
-                    status= true;
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-            return false;
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
         }
-        return status;
+        return haveConnectedWifi || haveConnectedMobile;
     }
 
     @Override
