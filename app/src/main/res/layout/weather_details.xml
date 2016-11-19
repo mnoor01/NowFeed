@@ -16,6 +16,7 @@
         card_view:cardCornerRadius="@dimen/corner_dim"
         card_view:cardElevation="@dimen/cardview_default_elevation"
         cardview:cardUseCompatPadding="true"
+        android:onClick="onClickRemoveDetils"
         >
         <RelativeLayout
             android:layout_width="match_parent"

@@ -1,7 +1,6 @@
 package com.example.nowfeed;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -15,7 +14,7 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by Millochka on 11/8/16.
  */
-public class WeatherFragment extends Fragment implements ViewGroup.OnClickListener {
+public class WeatherFragment extends Fragment {
 
     private final String WDESCRIPTION = "WDESCRIPTION";
     private final String WCITY = "WCITY";
@@ -59,7 +58,7 @@ public class WeatherFragment extends Fragment implements ViewGroup.OnClickListen
         mTemp.setText(getArguments().getString(WTEMP));
         mPressure.setText(getArguments().getString(WPRESSURE));
         mHumidity.setText(getArguments().getString(WHUMIDITY));
-        mWeather.setOnClickListener(this);
+        //mWeather.setOnClickListener(this);
 
     }
 
@@ -77,12 +76,12 @@ public class WeatherFragment extends Fragment implements ViewGroup.OnClickListen
     }
 
 
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(view.getContext(), MainActivity.class);
-        startActivity(intent);
-
-    }
+//    @Override
+//    public void onClick(View view) {
+//        Intent intent = new Intent(view.getContext(), MainActivity.class);
+//        startActivity(intent);
+//
+//    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {

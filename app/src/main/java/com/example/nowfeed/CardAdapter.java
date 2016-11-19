@@ -2,7 +2,6 @@ package com.example.nowfeed;
 
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +18,6 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
-import com.example.nowfeed.model.WeatherRespond;
-
-import java.util.List;
-
 /**
  * Created by Millochka on 10/30/16.
  */
@@ -32,7 +27,7 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
     static InstagramFragment instafrag = new InstagramFragment();
     static FragmentManager fragmentManager;
     static boolean isFragOpen = false;
-
+    static WeatherFragment detailedWeather;
     public final int INSTAGRAM = 0, WEATHER = 1, NOTES = 2, TOPSTORIES = 3, BESTSELLERS = 4;
 
     public static final String SHARED_NAME= "mynotes";
@@ -132,7 +127,7 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
     @Override
     public void onClick(View view) {
 
-        WeatherFragment detailedWeather = new WeatherFragment();
+       detailedWeather = new WeatherFragment();
         int itemId = view.getId();
         switch (itemId) {
             case R.id.day1:
@@ -190,6 +185,10 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
 
     public static FragmentManager getFragMan() {
         return fragmentManager;
+    }
+
+    public static WeatherFragment getDetailedWeather() {
+        return detailedWeather;
     }
 
     public static boolean getIsTrue() {

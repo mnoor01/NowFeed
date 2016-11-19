@@ -15,17 +15,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.widget.Button;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.nowfeed.network.WeatherApi;
 import com.example.nowfeed.model.BestSeller;
 import com.example.nowfeed.model.ForecastFiveDays;
 import com.example.nowfeed.model.Instagram;
 import com.example.nowfeed.model.TopStory;
 import com.example.nowfeed.network.InstagramService;
 import com.example.nowfeed.network.NYTimesService;
+import com.example.nowfeed.network.WeatherApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -192,6 +191,12 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         FragmentManager fm = CardAdapter.getFragMan();
         FragmentTransaction ft = fm.beginTransaction();
         ft.remove(CardAdapter.getInstaFrag()).commit();
+    }
+
+    public void onClickRemoveDetils(View view){
+        getFragmentManager().beginTransaction().remove(CardAdapter.detailedWeather).commit();
+
+
     }
 
     @Override
