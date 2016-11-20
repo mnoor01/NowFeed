@@ -1,7 +1,6 @@
 package com.example.nowfeed;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,13 +31,15 @@ public class TopStoriesViewHolder extends RecyclerView.ViewHolder {
         return inflater.inflate(R.layout.topviewed_card, parent, false);
     }
 
-    protected void onBind(TopStory tsPOJO) {
+    protected void onBind(TopStory.results tsPOJO) {
         ivThumbnail = (ImageView) mView.findViewById(R.id.idtopviewedthumbnail);
         tvTitle = (TextView) mView.findViewById(R.id.idtopviewedtitle);
 
-        tvTitle.setText(tsPOJO.getResults().get(0).getTitle());
-        String url = tsPOJO.getResults().get(0).getMultimedia().get(3).getUrl();
-        Log.d("Top Stories URL", url);
-        Picasso.with(mView.getContext()).load(url).resize(400, 200).centerCrop().into(ivThumbnail);
+        tvTitle.setText(tsPOJO.getTitle());
+        try {
+            String url = tsPOJO.getMultimedia().get(1).getUrl();
+            Picasso.with(mView.getContext()).load(url).resize(400, 200).centerCrop().into(ivThumbnail);
+        } catch (IndexOutOfBoundsException e) {
+        }
     }
 }

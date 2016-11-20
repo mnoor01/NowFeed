@@ -18,6 +18,7 @@ public class BestSellersViewHolder extends RecyclerView.ViewHolder {
     View mView;
     ImageView ivThumbnail;
     TextView tvTitle, tvAuthor, tvDescription;
+    private BestSeller.results bsPOJO;
 
     public BestSellersViewHolder(ViewGroup parent) {
         super(inflateView(parent));
@@ -30,13 +31,14 @@ public class BestSellersViewHolder extends RecyclerView.ViewHolder {
         return inflater.inflate(R.layout.best_seller_card, parent, false);
     }
 
-    protected void onBind(BestSeller bsPOJO) {
+    protected void onBind(BestSeller.results bsInput) {
+        this.bsPOJO = bsInput;
         tvTitle = (TextView) mView.findViewById(R.id.idTitle);
         tvAuthor = (TextView) mView.findViewById(R.id.idAuthor);
         tvDescription = (TextView) mView.findViewById(R.id.idDescription);
 
-        tvTitle.setText(bsPOJO.getResults().get(1).getTitle());
-        tvAuthor.setText(bsPOJO.getResults().get(1).getAuthor());
-        tvDescription.setText(bsPOJO.getResults().get(1).getDescription());
+        tvTitle.setText(bsPOJO.getTitle());
+        tvAuthor.setText(bsPOJO.getAuthor());
+        tvDescription.setText(bsPOJO.getDescription());
     }
 }

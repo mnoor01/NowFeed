@@ -2,30 +2,33 @@ package com.example.nowfeed;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.widget.Button;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.nowfeed.network.WeatherApi;
 import com.example.nowfeed.model.BestSeller;
 import com.example.nowfeed.model.ForecastFiveDays;
 import com.example.nowfeed.model.Instagram;
 import com.example.nowfeed.model.TopStory;
 import com.example.nowfeed.network.InstagramService;
 import com.example.nowfeed.network.NYTimesService;
+import com.example.nowfeed.network.WeatherApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +40,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
+public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
     InstagramFragment instafrag = new InstagramFragment();
-    VideoFragment vidfrag = new VideoFragment();
 
     List<Object> mCardsData = new ArrayList<>();
     private static final String TAG = "MainActivity";
@@ -51,23 +53,20 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private static final String LOCATION = "NEWYORK,USA";
     public Retrofit mRetrofit;
     WeatherApi mWeatherApi;
-
+    static FragmentManager fragmentManager;
     RecyclerView recyclerView;
+    private ProgressDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDetector = new GestureDetectorCompat(this,this);
-
-        if (isNetworkOnline() == false){
-            Toast toast = Toast.makeText(this, "Please check your network. App will only have partial functionality", Toast.LENGTH_LONG);
-            toast.show();
-        }
+        mDetector = new GestureDetectorCompat(this, this);
+        showProgress();
 
 //        //Hyun
-          mCardsData.add("My notes");
+        mCardsData.add("My notes");
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // If the screen is now in landscape mode, we can show the
             sharedPrefs = getSharedPreferences("Stuff", MODE_PRIVATE);
@@ -92,7 +91,21 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
             public void run() {
                 initializeRecView();
             }
-        }, 4000);
+        }, 5000);
+    }
+
+
+    public void showProgress() {
+        final int time = 5*1000;
+        final ProgressDialog dlg = new ProgressDialog(this);
+        dlg.setMessage("Loading data...");
+        dlg.setCancelable(false);
+        dlg.show();
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                dlg.dismiss();
+            }
+        }, time);
     }
 
     public void InstagramAPI() {
@@ -146,7 +159,9 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 .baseUrl("https://api.nytimes.com/svc/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         NYTimesService igService = retrofit.create(NYTimesService.class);
+
         Call<TopStory> getRecentMedia = igService.getTopStories();
         getRecentMedia.enqueue(new Callback<TopStory>() {
             @Override
@@ -185,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     public void initializeRecView() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new CardAdapter(mCardsData, getFragmentManager()));
+        recyclerView.setAdapter(new CardAdapter(mCardsData, getFragmentManager(), this));
     }
 
     public void onClickRemoveFrag(View view) {
@@ -205,26 +220,28 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     }
 
     public boolean isNetworkOnline() {
-        boolean status=false;
-        try{
+        boolean status = false;
+        try {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getNetworkInfo(0);
-            if (netInfo != null && netInfo.getState()==NetworkInfo.State.CONNECTED) {
-                status= true;
-            }else {
+            if (netInfo != null && netInfo.getState() == NetworkInfo.State.CONNECTED) {
+                status = true;
+            } else {
                 netInfo = cm.getNetworkInfo(1);
-                if(netInfo!=null && netInfo.getState()==NetworkInfo.State.CONNECTED)
-                    status= true;
+                if (netInfo != null && netInfo.getState() == NetworkInfo.State.CONNECTED)
+                    status = true;
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
         return status;
     }
 
+    // Gesture listeners:
+
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         this.mDetector.onTouchEvent(event);
         // Be sure to call the superclass implementation
         return super.onTouchEvent(event);

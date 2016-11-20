@@ -3,5 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="temp_dim">30dp</dimen>
-    <dimen name="corner_dim">20dp</dimen>
+    <dimen name="corner_dim">5dp</dimen>
 </resources>

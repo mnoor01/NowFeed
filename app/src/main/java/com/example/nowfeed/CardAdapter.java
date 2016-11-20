@@ -1,9 +1,11 @@
 package com.example.nowfeed;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.app.Activity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,10 +21,6 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
-import com.example.nowfeed.model.WeatherRespond;
-
-import java.util.List;
-
 /**
  * Created by Millochka on 10/30/16.
  */
@@ -32,14 +30,18 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
     static InstagramFragment instafrag = new InstagramFragment();
     static FragmentManager fragmentManager;
     static boolean isFragOpen = false;
+    private Activity a;
+    private RecyclerView hRecyclerView;
+
 
     public final int INSTAGRAM = 0, WEATHER = 1, NOTES = 2, TOPSTORIES = 3, BESTSELLERS = 4;
 
-    public static final String SHARED_NAME= "mynotes";
+    public static final String SHARED_NAME = "mynotes";
 
-    public CardAdapter(List<Object> items, FragmentManager fmInput) {
+    public CardAdapter(List<Object> items, FragmentManager fmInput, Activity aInput) {
         this.items = items;
         this.fragmentManager = fmInput;
+        this.a = aInput;
     }
 
     private final String WDESCRIPTION = "WDESCRIPTION";
@@ -61,10 +63,10 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
                 viewHolder = new SecondCardViewHolder(parent);
                 break;
             case TOPSTORIES:
-                viewHolder = new TopStoriesViewHolder(parent);
+                viewHolder = new TopStoriesRecyclerView(parent);
                 break;
             case BESTSELLERS:
-                viewHolder = new BestSellersViewHolder(parent);
+                viewHolder = new BestSellersRecyclerView(parent);
                 break;
             default:
                 viewHolder = new ThirdCardViewHolder(parent);
@@ -74,7 +76,7 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         switch (getItemViewType(position)) {
             case INSTAGRAM:
                 InstagramCardViewHolder firstCard = (InstagramCardViewHolder) holder;
@@ -94,12 +96,24 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
                 onClick(secondCard.mView);
                 break;
             case TOPSTORIES:
-                TopStoriesViewHolder topviewedCard = (TopStoriesViewHolder) holder;
+                TopStoriesRecyclerView topviewedCard = (TopStoriesRecyclerView) holder;
                 topviewedCard.onBind((TopStory) items.get(position));
+
+                hRecyclerView = (RecyclerView) holder.itemView.findViewById(R.id.idTopStoriesRecyclerView);
+                hRecyclerView.setNestedScrollingEnabled(false);
+                hRecyclerView.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext(), LinearLayoutManager.HORIZONTAL, false));
+                hRecyclerView.setAdapter(new TopStoriesAdapter(items.get(position)));
+
                 break;
             case BESTSELLERS:
-                BestSellersViewHolder bestSellersCard = (BestSellersViewHolder) holder;
+                BestSellersRecyclerView bestSellersCard = (BestSellersRecyclerView) holder;
                 bestSellersCard.onBind((BestSeller) items.get(position));
+                Log.d("stuff", "" + ((BestSeller) items.get(position)).getResults().size());
+
+                hRecyclerView = (RecyclerView) holder.itemView.findViewById(R.id.idBestSellerRecyclerView);
+                hRecyclerView.setNestedScrollingEnabled(false);
+                hRecyclerView.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext(), LinearLayoutManager.HORIZONTAL, false));
+                hRecyclerView.setAdapter(new BestSellersAdapter(items.get(position)));
                 break;
             default:
                 break;

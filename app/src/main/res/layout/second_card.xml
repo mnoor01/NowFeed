@@ -4,37 +4,39 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:cardview="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="200dp">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/weather_CV"
         android:background="@color/colorLightPink"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginBottom="5dp"
         card_view:cardCornerRadius="@dimen/corner_dim"
         card_view:cardElevation="@dimen/cardview_default_elevation"
-        cardview:cardUseCompatPadding="true"
-        >
+        cardview:cardUseCompatPadding="true">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@color/colorLightPink"
             android:gravity="left">
+
             <TextView
                 android:id="@+id/cityText"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                />
+                android:layout_centerHorizontal="true" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_below="@id/cityText">
+
                 <LinearLayout
                     android:id="@+id/day1"
                     android:layout_width="wrap_content"
@@ -42,44 +44,42 @@
                     android:layout_weight="0.2"
                     android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/weather_icon1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                 />
+                    <ImageView
+                        android:id="@+id/weather_icon1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true" />
 
-            <TextView
-                android:layout_marginLeft="10dp"
-                android:id="@+id/weather_discription1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/weather_icon1"
-                android:layout_alignLeft="@id/weather_icon1"
-                />
-            <TextView
-                android:id="@+id/temp1"
-                style="@style/tempStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_alignBaseline="@id/weather_discription1"
-                android:layout_toRightOf="@id/weather_discription1"/>
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/weather_discription1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/weather_icon1"
+                        android:layout_alignLeft="@id/weather_icon1" />
+
+                    <TextView
+                        android:id="@+id/temp1"
+                        style="@style/tempStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_alignBaseline="@id/weather_discription1"
+                        android:layout_toRightOf="@id/weather_discription1" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/day2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
-                    android:orientation="vertical"
-                   >
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/weather_icon2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                         />
+                        android:layout_alignParentLeft="true" />
 
                     <TextView
                         android:layout_marginLeft="10dp"
@@ -87,8 +87,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/weather_icon2"
-                        android:layout_alignLeft="@id/weather_icon2"
-                        />
+                        android:layout_alignLeft="@id/weather_icon2" />
+
                     <TextView
                         android:id="@+id/temp2"
                         style="@style/tempStyle"
@@ -96,8 +96,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
                         android:layout_alignBaseline="@id/weather_discription2"
-                        android:layout_toRightOf="@id/weather_discription2"/>
+                        android:layout_toRightOf="@id/weather_discription2" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/day3"
                     android:layout_width="wrap_content"
@@ -109,8 +110,7 @@
                         android:id="@+id/weather_icon3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                         />
+                        android:layout_alignParentLeft="true" />
 
                     <TextView
                         android:layout_marginLeft="10dp"
@@ -118,8 +118,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/weather_icon3"
-                        android:layout_alignLeft="@id/weather_icon3"
-                        />
+                        android:layout_alignLeft="@id/weather_icon3" />
+
                     <TextView
                         android:id="@+id/temp3"
                         style="@style/tempStyle"
@@ -127,8 +127,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
                         android:layout_alignBaseline="@id/weather_discription3"
-                        android:layout_toRightOf="@id/weather_discription3"/>
+                        android:layout_toRightOf="@id/weather_discription3" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/day4"
                     android:layout_width="wrap_content"
@@ -140,8 +141,7 @@
                         android:id="@+id/weather_icon4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                         />
+                        android:layout_alignParentLeft="true" />
 
                     <TextView
                         android:layout_marginLeft="10dp"
@@ -149,8 +149,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/weather_icon4"
-                        android:layout_alignLeft="@id/weather_icon4"
-                        />
+                        android:layout_alignLeft="@id/weather_icon4" />
+
                     <TextView
                         android:id="@+id/temp4"
                         style="@style/tempStyle"
@@ -158,7 +158,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
                         android:layout_alignBaseline="@id/weather_discription4"
-                        android:layout_toRightOf="@id/weather_discription4"/>
+                        android:layout_toRightOf="@id/weather_discription4" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -172,8 +172,7 @@
                         android:id="@+id/weather_icon5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                         />
+                        android:layout_alignParentLeft="true" />
 
                     <TextView
                         android:layout_marginLeft="10dp"
@@ -181,8 +180,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/weather_icon5"
-                        android:layout_alignLeft="@id/weather_icon5"
-                        />
+                        android:layout_alignLeft="@id/weather_icon5" />
+
                     <TextView
                         android:id="@+id/temp5"
                         style="@style/tempStyle"
@@ -190,11 +189,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
                         android:layout_alignBaseline="@id/weather_discription5"
-                        android:layout_toRightOf="@id/weather_discription5"/>
+                        android:layout_toRightOf="@id/weather_discription5" />
                 </LinearLayout>
 
             </LinearLayout>
-       </RelativeLayout>
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 
