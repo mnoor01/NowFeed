@@ -62,18 +62,22 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDetector = new GestureDetectorCompat(this, this);
-        showProgress();
+        mDetector = new GestureDetectorCompat(this,this);
+
+        if (isNetworkOnline() == false){
+            Toast toast = Toast.makeText(this, "Please check your network. App will only have partial functionality", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
 //        //Hyun
         mCardsData.add("My notes");
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // If the screen is now in landscape mode, we can show the
             sharedPrefs = getSharedPreferences("Stuff", MODE_PRIVATE);
-            getAddedNotes = sharedPrefs.getStringSet("mAddedNotes", ThirdCardViewHolder.getAddHash());
-            getSavedNotes = sharedPrefs.getStringSet("mSavedNotes", ThirdCardViewHolder.getSavedHash());
-            ThirdCardViewHolder.setSavedNotes(getSavedNotes);
-            ThirdCardViewHolder.setAddedNotes(getAddedNotes);
+            getAddedNotes = sharedPrefs.getStringSet("mAddedNotes", NotesCardViewHolder.getAddHash());
+            getSavedNotes = sharedPrefs.getStringSet("mSavedNotes", NotesCardViewHolder.getSavedHash());
+            NotesCardViewHolder.setSavedNotes(getSavedNotes);
+            NotesCardViewHolder.setAddedNotes(getAddedNotes);
         }
         WeatherAPI();
 
@@ -214,8 +218,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         super.onDestroy();
         sharedPrefs = getSharedPreferences("Stuff", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putStringSet("mAddNotes", ThirdCardViewHolder.getAddHash());
-        editor.putStringSet("mSavedNotes", ThirdCardViewHolder.getSavedHash());
+        editor.putStringSet("mAddNotes", NotesCardViewHolder.getAddHash());
+        editor.putStringSet("mSavedNotes", NotesCardViewHolder.getSavedHash());
         editor.apply();
     }
 

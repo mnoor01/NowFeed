@@ -3,11 +3,12 @@ package com.example.nowfeed;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.nowfeed.model.BestSeller;
 import com.example.nowfeed.model.City;
@@ -28,6 +29,7 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
 
     private List<Object> items;
     static InstagramFragment instafrag = new InstagramFragment();
+    private static NotesFragment notesFragment = new NotesFragment();
     static FragmentManager fragmentManager;
     static boolean isFragOpen = false;
     private Activity a;
@@ -69,7 +71,7 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
                 viewHolder = new BestSellersRecyclerView(parent);
                 break;
             default:
-                viewHolder = new ThirdCardViewHolder(parent);
+                viewHolder = new NotesCardViewHolder(parent);
                 break;
         }
         return viewHolder;
@@ -116,16 +118,26 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
                 hRecyclerView.setAdapter(new BestSellersAdapter(items.get(position)));
                 break;
             default:
+                NotesCardViewHolder notesCardViewHolder = (NotesCardViewHolder) holder;
+                notesCardViewHolder.mList.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.idFragLayout,notesFragment)
+                                .addToBackStack(null)
+                                .commit();
+                        Toast.makeText(view.getContext(), "Heading to your List", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
-
         }
+
     }
 
     @Override
     public int getItemCount() {
         return items.size();
     }
-
 
     @Override
     public int getItemViewType(int position) {
@@ -172,7 +184,6 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
         }
     }
 
-
     public Bundle retrieveWeatherDetails(int index, ForecastFiveDays weatherRespond) {
 
         City city = weatherRespond.getCity();
@@ -209,5 +220,6 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
     public static boolean getIsTrue() {
         return isFragOpen;
     }
+
 
 }
