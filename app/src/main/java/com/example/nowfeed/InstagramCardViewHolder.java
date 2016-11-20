@@ -24,6 +24,8 @@ public class InstagramCardViewHolder extends RecyclerView.ViewHolder {
     private FragmentManager supportFragmentManager;
     static InstagramFragment instafrag = new InstagramFragment();
     String sUrl;
+    ImageView mLogo;
+    ImageView mTitle;
 
     public InstagramCardViewHolder(ViewGroup parent) {
         super(inflateView(parent));
@@ -40,10 +42,15 @@ public class InstagramCardViewHolder extends RecyclerView.ViewHolder {
         int value = rand.nextInt(instagram.getData().size() - 1);
 
         ivMedia = (ImageView) mView.findViewById(R.id.idCardImageView);
+       mLogo = (ImageView) mView.findViewById(R.id.logo);
+        mTitle = (ImageView) mView.findViewById(R.id.inst_title);
+
         sUrl = instagram.getData().get(value).getImages().getlow_resolution().getUrl().toString();
         instafrag.setName(sUrl);
         Log.d("sUrl", sUrl);
         Picasso.with(mView.getContext()).load(sUrl).resize(400, 200).centerCrop().into(ivMedia);
+        mLogo.setImageResource(R.drawable.instagram);
+        mTitle.setImageResource(R.drawable.instagram_logo);
     }
 
 }

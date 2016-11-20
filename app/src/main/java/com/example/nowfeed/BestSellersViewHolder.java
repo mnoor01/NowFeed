@@ -36,7 +36,7 @@ public class BestSellersViewHolder extends RecyclerView.ViewHolder {
         tvDescription = (TextView) mView.findViewById(R.id.idDescription);
 
         tvTitle.setText(bsPOJO.getResults().get(1).getTitle());
-        tvAuthor.setText(bsPOJO.getResults().get(1).getAuthor());
+        tvAuthor.setText("Author: "+bsPOJO.getResults().get(1).getAuthor());
         tvDescription.setText(bsPOJO.getResults().get(1).getDescription());
     }
 }

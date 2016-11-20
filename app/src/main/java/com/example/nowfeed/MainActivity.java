@@ -60,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         setContentView(R.layout.activity_main);
 
         mDetector = new GestureDetectorCompat(this,this);
+        if (haveNetworkConnection() == false){
+            Toast toast = Toast.makeText(this, "Please check your network. App will only have partial functionality", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
 
 
@@ -163,10 +167,6 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     @Override
     protected void onStart() {
         super.onStart();
-        if (haveNetworkConnection() == false){
-            Toast toast = Toast.makeText(this, "Please check your network. App will only have partial functionality", Toast.LENGTH_LONG);
-            toast.show();
-        }
 
     }
 
@@ -216,11 +216,11 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         editor.putStringSet("mSavedNotes", ThirdCardViewHolder.getSavedHash());
         editor.apply();
     }
-    
+
 
     private boolean haveNetworkConnection() {
         boolean haveConnectedWifi = false;
-        boolean haveConnectedMobile = false;
+
 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo[] netInfo = cm.getAllNetworkInfo();
@@ -228,11 +228,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
             if (ni.getTypeName().equalsIgnoreCase("WIFI"))
                 if (ni.isConnected())
                     haveConnectedWifi = true;
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-                if (ni.isConnected())
-                    haveConnectedMobile = true;
         }
-        return haveConnectedWifi || haveConnectedMobile;
+        return haveConnectedWifi;
     }
 
     @Override

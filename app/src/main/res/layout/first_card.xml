@@ -4,22 +4,42 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:cardview="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="200dp">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/instagram_CV"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginBottom="5dp"
         card_view:cardCornerRadius="@dimen/corner_dim"
         card_view:cardElevation="@dimen/cardview_default_elevation"
         cardview:cardUseCompatPadding="true">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"/>
+            <ImageView
+                android:id="@+id/inst_title"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/logo"/>
+
         <ImageView
+
             android:id="@+id/idCardImageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/logo"/>
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 

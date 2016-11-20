@@ -60,7 +60,8 @@
                     <Button
                         android:id="@+id/add_notes"
                         android:background="@drawable/pink_button"
-                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"/>
                     <Button
                         android:id="@+id/save_notes"
