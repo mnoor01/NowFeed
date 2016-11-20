@@ -56,6 +56,10 @@ public class TopStory {
             return multimedia;
         }
 
+        public String getUrl() {
+            return this.url;
+        }
+
         public class des_facet {
         }
 

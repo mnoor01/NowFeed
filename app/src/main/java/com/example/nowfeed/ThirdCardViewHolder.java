@@ -71,19 +71,19 @@ public class ThirdCardViewHolder extends RecyclerView.ViewHolder implements View
         }
     }
 
-    public static Set<String> getAddHash(){
+    public static Set<String> getAddHash() {
         return mAddNotes;
     }
 
-    public static Set<String> getSavedHash(){
+    public static Set<String> getSavedHash() {
         return mSavedNotes;
     }
 
-    public static void setSavedNotes(Set<String> savedNotes){
+    public static void setSavedNotes(Set<String> savedNotes) {
         lastSaved = savedNotes;
     }
 
-    public static void setAddedNotes(Set<String> addedNotes){
+    public static void setAddedNotes(Set<String> addedNotes) {
         lastAdded = addedNotes;
     }
 

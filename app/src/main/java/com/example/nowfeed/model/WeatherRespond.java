@@ -89,6 +89,7 @@ public class WeatherRespond {
         public double getSpeed() {
             return speed;
         }
+
         public double getDeg() {
             return deg;
         }
