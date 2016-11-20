@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:cardview="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp">
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/notes_CV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,10 +32,9 @@
                 android:text="MY NOTES"
                 android:textColor="@color/colorAccent"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <LinearLayout
-                android:id="@+id/main_notes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -57,22 +58,17 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/add_notesBtn"
+                        android:id="@+id/add_notes"
                         android:background="@drawable/pink_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"/>
                     <Button
-                        android:id="@+id/save_notesBtn"
+                        android:id="@+id/save_notes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="save" />
-                    <Button
-                        android:id="@+id/list_notesBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="list"
-                        android:onClick="onClickListNotes"/>
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

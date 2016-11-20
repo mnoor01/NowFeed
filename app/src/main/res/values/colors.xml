@@ -6,4 +6,9 @@
     <color name="colorTemp">#ff40ff</color>
     <color name="otherinfo">#9c6a9c</color>
     <color name="colorLightPink">#e7d2e7</color>
+    <color name="colorGray">#9e859e</color>
+    <color name="colorPrimary_MyTheme">#e4a0f5</color>
+    <color name="colorPrimaryDark_MyTheme">#7a34ac</color>
+    <color name="colorAccent_MyTheme">#c660f5</color>
+    <color name="Gray">#908b93</color>
 </resources>

@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
@@ -30,6 +31,10 @@ import static android.content.ContentValues.TAG;
 public class SecondCardViewHolder extends RecyclerView.ViewHolder {
 
     TextView mDescription1;
+    TextView mDescription2;
+    TextView mDescription3;
+    TextView mDescription4;
+    TextView mDescription5;
     TextView mCity;
     ImageView mIcon1;
     ImageView mIcon2;
@@ -80,6 +85,10 @@ public class SecondCardViewHolder extends RecyclerView.ViewHolder {
         mView = itemView;
         //mTitle=(TextView)mView.findViewById(R.id.weather_title);
         mDescription1 = (TextView) mView.findViewById(R.id.weather_discription1);
+        mDescription2 = (TextView) mView.findViewById(R.id.weather_discription2);
+        mDescription3 = (TextView) mView.findViewById(R.id.weather_discription3);
+        mDescription4 = (TextView) mView.findViewById(R.id.weather_discription4);
+        mDescription5 = (TextView) mView.findViewById(R.id.weather_discription5);
         mIcon1 = (ImageView) mView.findViewById(R.id.weather_icon1);
         mIcon2 = (ImageView) mView.findViewById(R.id.weather_icon2);
         mIcon3 = (ImageView) mView.findViewById(R.id.weather_icon3);
@@ -117,27 +126,35 @@ public class SecondCardViewHolder extends RecyclerView.ViewHolder {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd ");
         Calendar cal = Calendar.getInstance();
         Log.d(TAG, cal.getTime().toString());
+        Date date= new Date();
+
+
 
         Weather weather1 = forecast.get(0).getWeather().get(0);
         Picasso.with(mView.getContext()).load("http://openweathermap.org/img/w/" + weather1.getIcon() + ".png").resize(170, 170).centerCrop().into(mIcon1);
         double temperature1 = Math.round(1.8 * (forecast.get(0).getTemp().getMax() - 273) + 32);
         mTemp1.setText(Double.toString(temperature1) + " ºF");
+        mDescription1.setText(String.valueOf(date.getMonth()+1)+"/"+String.valueOf(date.getDate()));
         Weather weather2 = forecast.get(1).getWeather().get(0);
         Picasso.with(mView.getContext()).load("http://openweathermap.org/img/w/" + weather2.getIcon() + ".png").resize(170, 170).centerCrop().into(mIcon2);
         double temperature2 = Math.round(1.8 * (forecast.get(1).getTemp().getMax() - 273) + 32);
+        mDescription2.setText(String.valueOf(date.getMonth()+1)+"/"+String.valueOf(date.getDate()+1));
         mTemp2.setText(Double.toString(temperature2) + " ºF");
         Weather weather3 = forecast.get(2).getWeather().get(0);
         Picasso.with(mView.getContext()).load("http://openweathermap.org/img/w/" + weather3.getIcon() + ".png").resize(170, 170).centerCrop().into(mIcon3);
         double temperature3 = Math.round(1.8 * (forecast.get(2).getTemp().getMax() - 273) + 32);
         mTemp3.setText(Double.toString(temperature3) + " ºF");
+        mDescription3.setText(String.valueOf(date.getMonth()+1)+"/"+String.valueOf(date.getDate()+2));
         Weather weather4 = forecast.get(3).getWeather().get(0);
         Picasso.with(mView.getContext()).load("http://openweathermap.org/img/w/" + weather4.getIcon() + ".png").resize(170, 170).centerCrop().into(mIcon4);
         double temperature4 = Math.round(1.8 * (forecast.get(3).getTemp().getMax() - 273) + 32);
         mTemp4.setText(Double.toString(temperature4) + " ºF");
+        mDescription4.setText(String.valueOf(date.getMonth()+1)+"/"+String.valueOf(date.getDate()+3));
         Weather weather5 = forecast.get(4).getWeather().get(0);
         Picasso.with(mView.getContext()).load("http://openweathermap.org/img/w/" + weather5.getIcon() + ".png").resize(170, 170).centerCrop().into(mIcon5);
         double temperature5 = Math.round(1.8 * (forecast.get(4).getTemp().getMax() - 273) + 32);
         mTemp5.setText(Double.toString(temperature5) + " ºF");
+        mDescription5.setText(String.valueOf(date.getMonth()+1)+"/"+String.valueOf(date.getDate()+4));
     }
 }
 

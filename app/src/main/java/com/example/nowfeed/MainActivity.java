@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
@@ -65,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         mDetector = new GestureDetectorCompat(this,this);
 
         showProgress();
+
+
 
 //        //Hyun
         mCardsData.add("My notes");
@@ -179,6 +182,12 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
     public void WeatherAPI() {
         mRetrofit = new Retrofit.Builder().baseUrl("http://api.openweathermap.org/").addConverterFactory(GsonConverterFactory.create()).build();
         mWeatherApi = mRetrofit.create(WeatherApi.class);
@@ -210,6 +219,12 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         ft.remove(CardAdapter.getInstaFrag()).commit();
     }
 
+    public void onClickRemoveDetils(View view){
+        getFragmentManager().beginTransaction().remove(CardAdapter.detailedWeather).commit();
+
+
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -220,23 +235,19 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         editor.apply();
     }
 
-    public boolean isNetworkOnline() {
-        boolean status = false;
-        try {
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getNetworkInfo(0);
-            if (netInfo != null && netInfo.getState() == NetworkInfo.State.CONNECTED) {
-                status = true;
-            } else {
-                netInfo = cm.getNetworkInfo(1);
-                if (netInfo != null && netInfo.getState() == NetworkInfo.State.CONNECTED)
-                    status = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
         }
-        return status;
+        return haveConnectedWifi;
     }
 
     // Gesture listeners:

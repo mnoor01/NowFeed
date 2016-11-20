@@ -37,6 +37,7 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
     private RecyclerView hRecyclerView;
 
 
+    static WeatherFragment detailedWeather;
     public final int INSTAGRAM = 0, WEATHER = 1, NOTES = 2, TOPSTORIES = 3, BESTSELLERS = 4;
 
     public static final String SHARED_NAME = "mynotes";
@@ -159,7 +160,7 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
     @Override
     public void onClick(View view) {
 
-        WeatherFragment detailedWeather = new WeatherFragment();
+       detailedWeather = new WeatherFragment();
         int itemId = view.getId();
         switch (itemId) {
             case R.id.day1:
@@ -216,6 +217,10 @@ public class CardAdapter extends RecyclerView.Adapter implements ViewGroup.OnCli
 
     public static FragmentManager getFragMan() {
         return fragmentManager;
+    }
+
+    public static WeatherFragment getDetailedWeather() {
+        return detailedWeather;
     }
 
     public static boolean getIsTrue() {
