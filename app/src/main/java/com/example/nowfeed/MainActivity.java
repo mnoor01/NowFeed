@@ -64,10 +64,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
         mDetector = new GestureDetectorCompat(this,this);
 
-        if (isNetworkOnline() == false){
-            Toast toast = Toast.makeText(this, "Please check your network. App will only have partial functionality", Toast.LENGTH_LONG);
-            toast.show();
-        }
+        showProgress();
 
 //        //Hyun
         mCardsData.add("My notes");
