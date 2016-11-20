@@ -58,16 +58,21 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/add_notes"
+                        android:id="@+id/add_notesBtn"
                         android:background="@drawable/pink_button"
                         android:layout_marginLeft="10dp"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"/>
                     <Button
-                        android:id="@+id/save_notes"
+                        android:id="@+id/save_notesBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="save" />
+                    <Button
+                        android:id="@+id/list_notesBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="list" />
 
                 </LinearLayout>
             </LinearLayout>
